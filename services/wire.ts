@@ -56,7 +56,9 @@ export async function orchestrateAnalysis(
     pct: 5,
   });
 
-  if (WIRE_API_KEY) {
+  const isWireConfigured = WIRE_API_KEY && !WIRE_API_KEY.startsWith('your_');
+
+  if (isWireConfigured) {
     try {
       return validateFinalReport(await runLiveWirePipeline(scraped, onProgress, options));
     } catch (error) {
@@ -70,11 +72,8 @@ export async function orchestrateAnalysis(
       }
       console.warn('[Wire] Falling back to modular agent pipeline because USE_HEURISTIC_FALLBACK=true.');
     }
-  } else if (!USE_HEURISTIC_FALLBACK) {
-    throw new WireOrchestrationError(
-      'WIRE_API_KEY is required for Wire orchestration. Set USE_HEURISTIC_FALLBACK=true only for local offline testing.',
-      'WIRE_API_KEY_MISSING'
-    );
+  } else {
+    console.warn('[Wire] Wire API key is not configured or is a placeholder. Using modular agent pipeline fallback.');
   }
 
   return validateFinalReport(await runModularWirePipeline(scraped, onProgress, options));
@@ -96,13 +95,13 @@ async function runLiveWirePipeline(
 
   let wireResult: Record<string, unknown>;
 
-  if (WIRE_ACTION_ID) {
+  const isActionConfigured = WIRE_ACTION_ID && !WIRE_ACTION_ID.startsWith('your_');
+
+  if (isActionConfigured) {
     wireResult = await executeWireTask(scraped, options);
   } else {
-    throw new WireOrchestrationError(
-      'WIRE_ACTION_ID is required. Use /wire/catalog or /wire/search to choose a Wire action for the EngineeringReport workflow.',
-      'WIRE_ACTION_ID_MISSING'
-    );
+    console.warn('[Wire] WIRE_ACTION_ID is not configured or is a placeholder. Using executeAgenticSearch fallback.');
+    wireResult = await executeAgenticSearch(scraped, options);
   }
 
   for (const agent of AGENT_STAGES.slice(3)) {

@@ -34,32 +34,45 @@ export async function scrapeRepository(url) {
         ? await fetchGitHubMetadata(validation.github.owner, validation.github.repo)
         : buildGenericMetadata(normalized, validation.sourceType);
     let scraped;
-    if (ANAKIN_API_KEY) {
-        const resourceResult = await scrapeEngineeringResource({ url: normalized, sourceType: validation.sourceType });
-        scraped = {
-            success: true,
-            url: normalized,
-            scrapedAt: new Date().toISOString(),
-            metadata: {
-                repoName: githubMeta.fullName,
-                primaryLanguage: githubMeta.language || 'Unknown',
-                folderStructure: resourceResult.resource.files.slice(0, 20),
-                rawReadme: resourceResult.resource.readme,
-            },
-            markdown: resourceResult.resource.documentation,
-            html: '',
-            extractedJson: {
-                scrapedResource: resourceResult.resource,
-            },
-            githubMeta,
-        };
+    const isAnakinConfigured = ANAKIN_API_KEY && !ANAKIN_API_KEY.startsWith('your_');
+    if (isAnakinConfigured) {
+        try {
+            const resourceResult = await scrapeEngineeringResource({ url: normalized, sourceType: validation.sourceType });
+            scraped = {
+                success: true,
+                url: normalized,
+                scrapedAt: new Date().toISOString(),
+                metadata: {
+                    repoName: githubMeta.fullName,
+                    primaryLanguage: githubMeta.language || 'Unknown',
+                    folderStructure: resourceResult.resource.files.slice(0, 20),
+                    rawReadme: resourceResult.resource.readme,
+                },
+                markdown: resourceResult.resource.documentation,
+                html: '',
+                extractedJson: {
+                    scrapedResource: resourceResult.resource,
+                },
+                githubMeta,
+            };
+        }
+        catch (error) {
+            console.error('[Anakin] Live scrape failed:', error);
+            if (USE_HEURISTIC_FALLBACK && validation.github) {
+                console.warn('[Anakin] Falling back to GitHub metadata fallback.');
+                scraped = buildFallbackScrape(normalized, githubMeta);
+            }
+            else {
+                throw error;
+            }
+        }
     }
-    else if (USE_HEURISTIC_FALLBACK && validation.github) {
-        console.warn('[Anakin] No ANAKIN_API_KEY — using GitHub metadata fallback because USE_HEURISTIC_FALLBACK=true.');
+    else if (validation.github) {
+        console.warn('[Anakin] Anakin API key is not configured or is a placeholder. Using GitHub metadata fallback.');
         scraped = buildFallbackScrape(normalized, githubMeta);
     }
     else {
-        throw new AnakinScraperError('ANAKIN_API_KEY is required for Anakin Universal Scraper. Set USE_HEURISTIC_FALLBACK=true only for local GitHub-only offline testing.', 'ANAKIN_API_KEY_MISSING', 500);
+        throw new AnakinScraperError('ANAKIN_API_KEY is required for Anakin Universal Scraper, and URL is not a GitHub repository to fall back to.', 'ANAKIN_API_KEY_MISSING', 500);
     }
     return normalizeScrapedContent(scraped);
 }
