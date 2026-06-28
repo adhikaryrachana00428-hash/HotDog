@@ -452,11 +452,11 @@ button { font-family: var(--font); }
 
 .stage-tag {
   font-size: 10.5px;
-  font-weight: 500;
+  font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--text-tertiary);
-  background: var(--bg-elevated);
+  color: #1A1A1A;
+  background: #FFF8E7;
   border: 1px solid var(--border);
   border-radius: 4px;
   padding: 1px 6px;
@@ -468,8 +468,8 @@ button { font-family: var(--font); }
   transition: color var(--t-md);
 }
 
-.stage.active .stage-status { color: var(--accent); }
-.stage.done   .stage-status { color: var(--success); }
+.stage.active .stage-status { color: #DC2626; }
+.stage.done   .stage-status { color: #059669; }
 
 /* Check icon (top-right) */
 .stage-check {
@@ -852,8 +852,8 @@ button { font-family: var(--font); }
 /* Wire status card */
 .wire-status-card {
   margin: 14px 14px 0;
-  background: var(--purple-muted);
-  border: 1px solid rgba(124,58,237,0.18);
+  background: rgba(124,58,237,0.05);
+  border: 1px solid rgba(124,58,237,0.2);
   border-radius: var(--radius-md);
   padding: 12px 14px;
   flex-shrink: 0;
@@ -869,7 +869,7 @@ button { font-family: var(--font); }
 .wire-status-name {
   font-size: 12.5px;
   font-weight: 700;
-  color: #A78BFA;
+  color: #6D28D9;
   letter-spacing: -0.01em;
 }
 
@@ -878,23 +878,23 @@ button { font-family: var(--font); }
   font-weight: 600;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  color: rgba(167,139,250,0.7);
-  background: rgba(124,58,237,0.12);
-  border: 1px solid rgba(124,58,237,0.2);
+  color: #7C3AED;
+  background: rgba(124,58,237,0.08);
+  border: 1px solid rgba(124,58,237,0.18);
   border-radius: 4px;
   padding: 1px 7px;
   transition: color var(--t-md), background var(--t-md);
 }
 
 .wire-status-badge.active-badge {
-  color: var(--success);
-  background: var(--success-muted);
-  border-color: var(--success-border);
+  color: #059669;
+  background: rgba(16,185,129,0.08);
+  border-color: rgba(16,185,129,0.25);
 }
 
 .wire-status-desc {
   font-size: 11.5px;
-  color: rgba(167,139,250,0.55);
+  color: #555566;
   line-height: 1.55;
   margin-bottom: 10px;
 }
@@ -908,8 +908,8 @@ button { font-family: var(--font); }
 .wire-agent-pill {
   font-size: 10px;
   font-weight: 500;
-  color: rgba(167,139,250,0.7);
-  background: rgba(124,58,237,0.10);
+  color: #7C3AED;
+  background: rgba(124,58,237,0.05);
   border: 1px solid rgba(124,58,237,0.15);
   border-radius: 3px;
   padding: 1.5px 6px;
@@ -919,9 +919,9 @@ button { font-family: var(--font); }
 }
 
 .wire-agent-pill.agent-done {
-  color: rgba(52,211,153,0.8);
-  background: rgba(16,185,129,0.08);
-  border-color: rgba(16,185,129,0.2);
+  color: #059669;
+  background: rgba(16,185,129,0.06);
+  border-color: rgba(16,185,129,0.18);
 }
 
 /* Feed scroll area */
