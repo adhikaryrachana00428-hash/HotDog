@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "tsx watch server/index.ts",
     "build": "tsc && node copy-static.js",
-    "start": "node dist/server/index.js",
+    "start": "node public/server/index.js",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

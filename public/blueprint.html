@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Engineering Blueprint · BuildDNA</title>
+  <meta name="description" content="Explore and understand your software's system architecture dynamically with the BuildDNA Engineering Blueprint.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="blueprint.css">
+</head>
+<body>
+
+  <!-- ─── HEADER / CONTROLS ─── -->
+  <header class="bp-header">
+    <div class="bp-header-left">
+      <a href="dashboard.html" class="back-btn" aria-label="Go back to dashboard">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Back to Dashboard
+      </a>
+      <span class="bp-divider">/</span>
+      <div class="bp-title-group">
+        <h1 class="bp-main-title" id="bp-project-name">next.js</h1>
+        <span class="bp-subtitle">Engineering Blueprint Map</span>
+      </div>
+    </div>
+
+    <!-- Search bar -->
+    <div class="bp-search-container">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+      </svg>
+      <input type="text" id="bp-search-input" placeholder="Search technology node..." autocomplete="off" spellcheck="false">
+      <div class="search-results-dropdown" id="search-dropdown"></div>
+    </div>
+
+    <div class="bp-header-right">
+      <div class="canvas-controls">
+        <button class="control-btn" id="zoom-in" title="Zoom In">+</button>
+        <button class="control-btn" id="zoom-out" title="Zoom Out">-</button>
+        <button class="control-btn" id="zoom-reset" title="Fit to screen">Fit</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── CANVAS WORKSPACE ─── -->
+  <div class="canvas-wrapper" id="canvas-wrapper">
+    <!-- Grid pattern background -->
+    <div class="canvas-grid" id="canvas-grid"></div>
+
+    <div class="canvas-pannable" id="canvas-pannable">
+      <!-- SVG connection lines wrapper -->
+      <svg class="connections-svg" id="connections-svg"></svg>
+
+      <!-- Dynamic Layer Structure Container -->
+      <div class="layers-container" id="layers-container">
+        <!-- Rendered dynamically by blueprint.js -->
+      </div>
+    </div>
+
+    <!-- MINI MAP -->
+    <div class="mini-map-container" id="mini-map-container">
+      <div class="mini-map-indicator" id="mini-map-indicator"></div>
+      <div class="mini-map-svg-wrap">
+        <svg id="mini-map-svg" width="140" height="90"></svg>
+      </div>
+    </div>
+
+    <!-- LAYER CONTROLS FLOATER -->
+    <div class="layer-toggles-card">
+      <div class="toggles-header">Layer Visibility</div>
+      <div class="toggles-list">
+        <label class="toggle-item">
+          <input type="checkbox" checked data-layer="user">
+          <span class="custom-check"></span>
+          User Layer
+        </label>
+        <label class="toggle-item">
+          <input type="checkbox" checked data-layer="frontend">
+          <span class="custom-check"></span>
+          Frontend Layer
+        </label>
+        <label class="toggle-item">
+          <input type="checkbox" checked data-layer="backend">
+          <span class="custom-check"></span>
+          Backend / API Layer
+        </label>
+        <label class="toggle-item">
+          <input type="checkbox" checked data-layer="database">
+          <span class="custom-check"></span>
+          Database Layer
+        </label>
+        <label class="toggle-item">
+          <input type="checkbox" checked data-layer="external">
+          <span class="custom-check"></span>
+          External Services
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── SIDE DETAIL PANEL ─── -->
+  <aside class="details-panel" id="details-panel" aria-label="Component properties">
+    <button class="close-panel-btn" id="close-panel" aria-label="Close properties panel">✕</button>
+    <div class="panel-scroll-content" id="panel-content">
+      <!-- Populated dynamically on node or connection click -->
+    </div>
+  </aside>
+
+  <!-- ─── BOTTOM INSIGHTS PANEL ─── -->
+  <section class="insights-panel" id="insights-panel" aria-labelledby="insights-title">
+    <div class="insights-header">
+      <div class="insights-header-left">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="insight-bolt-icon">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+        </svg>
+        <h2 id="insights-title">Architecture Insights</h2>
+      </div>
+      <button class="toggle-insights-btn" id="toggle-insights">Show Insights Panel</button>
+    </div>
+    
+    <div class="insights-body-content" id="insights-content">
+      <div class="insights-grid">
+        <div class="insight-card">
+          <div class="insight-card-title">Critical Path Dependency</div>
+          <p class="insight-card-text" id="insight-crit-dep">Prisma Client acts as the data query gateway. High load or database locking on PostgreSQL instantly stalls the edge API execution layers.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-card-title">Potential Bottleneck</div>
+          <p class="insight-card-text" id="insight-bottleneck">Vercel serverless cold-start limits can add up to 150ms delay on initial DB query triggers due to native Rust framework initialization limits.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-card-title">Opportunities to Simplify</div>
+          <p class="insight-card-text" id="insight-simplify">Replacing tRPC endpoints completely with Next.js Server Actions eliminates intermediate interface router definitions and boilerplate structures.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-card-title">Suggested Modernization</div>
+          <p class="insight-card-text" id="insight-modern">Migrating data retrieval models to Drizzle ORM avoids cold-starts entirely and uses JS query mappings instead of external compiler executables.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script src="api.js"></script>
+  <script src="blueprint.js"></script>
+</body>
+</html>

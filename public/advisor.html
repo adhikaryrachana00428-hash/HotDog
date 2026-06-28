@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering Advisor · BuildDNA</title>
+  <meta name="description" content="AI-powered contextual architecture advice and technology recommendations to optimize software scale and DX.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="advisor.css">
+</head>
+<body>
+
+  <!-- ─── HEADER ─── -->
+  <header class="adv-header">
+    <div class="adv-header-left">
+      <a href="dashboard.html" class="back-link" id="back-link" aria-label="Back to dashboard">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 3L5 8l5 5"/>
+        </svg>
+        Dashboard
+      </a>
+      <span class="adv-separator">/</span>
+      <span class="breadcrumbs">
+        <span class="breadcrumb-item" id="repo-breadcrumb">vercel/next.js</span>
+        <span class="breadcrumb-arrow">/</span>
+        <span class="breadcrumb-item active">Engineering Advisor</span>
+      </span>
+    </div>
+    <div class="adv-header-right">
+      <div class="wire-badge">
+        <span class="wire-dot"></span>
+        <span>Advisor Agent v2.0</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── MAIN LAYOUT ─── -->
+  <div class="adv-layout">
+    
+    <!-- LEFT SIDEBAR: Scroll Spy -->
+    <aside class="adv-sidebar">
+      <nav class="spy-nav">
+        <div class="spy-title">Advisor Sections</div>
+        <a href="#health-overview" class="spy-link active">01. Architecture Health</a>
+        <a href="#tech-upgrades" class="spy-link">02. Stack Upgrades</a>
+        <a href="#tool-discovery" class="spy-link">03. Tool Discovery</a>
+        <a href="#opportunities" class="spy-link">04. Opportunities</a>
+        <a href="#scaling-path" class="spy-link">05. Scaling Path</a>
+      </nav>
+    </aside>
+
+    <!-- CENTER CONTENT -->
+    <main class="adv-content">
+      
+      <!-- HERO HEADER -->
+      <section class="adv-hero">
+        <div class="adv-hero-badge">Staff Architect Feedback</div>
+        <h1 class="adv-title">Engineering Advisor</h1>
+        <p class="adv-subtitle">Contextual, data-driven suggestions to optimize your project's architecture, developer workflow, and scaling boundaries.</p>
+      </section>
+
+      <!-- SECTION 1: ARCHITECTURE HEALTH OVERVIEW -->
+      <section id="health-overview" class="chapter-section">
+        <h2 class="chapter-title">01. Architecture Health Overview</h2>
+        <p class="section-desc">Critical system quality metrics evaluated by the Wire Architecture Agent.</p>
+        
+        <div class="health-overview-grid" id="health-grid">
+          <!-- Populated dynamically by advisor.js -->
+        </div>
+      </section>
+
+      <!-- SECTION 2: TECHNOLOGY UPGRADES -->
+      <section id="tech-upgrades" class="chapter-section">
+        <h2 class="chapter-title">02. Technology Recommendations</h2>
+        <p class="section-desc">Contextual upgrades comparing your current stack to modern alternatives.</p>
+        
+        <div class="upgrades-list" id="upgrades-list">
+          <!-- Populated dynamically by advisor.js -->
+        </div>
+      </section>
+
+      <!-- SECTION 3: HIDDEN TOOL DISCOVERY -->
+      <section id="tool-discovery" class="chapter-section">
+        <h2 class="chapter-title">03. Hidden Tool Discovery</h2>
+        <p class="section-desc">Lesser-known developer tools and open-source packages that complement your codebase stack.</p>
+        
+        <div class="tools-grid" id="tools-grid">
+          <!-- Populated dynamically by advisor.js -->
+        </div>
+      </section>
+
+      <!-- SECTION 4: OPPORTUNITIES -->
+      <section id="opportunities" class="chapter-section">
+        <h2 class="chapter-title">04. Improvement Opportunities</h2>
+        <p class="section-desc">Targeted, actionable suggestions categorized by engineering scope.</p>
+        
+        <div class="filter-bar" role="group" aria-label="Filter opportunities by scope">
+          <button class="filter-btn active" data-filter="all">All Scopes</button>
+          <button class="filter-btn" data-filter="performance">Performance</button>
+          <button class="filter-btn" data-filter="security">Security</button>
+          <button class="filter-btn" data-filter="codeQuality">Code Quality</button>
+        </div>
+
+        <div class="opportunities-list" id="opportunities-list">
+          <!-- Populated dynamically by advisor.js -->
+        </div>
+      </section>
+
+      <!-- SECTION 5: SCALING PATH -->
+      <section id="scaling-path" class="chapter-section">
+        <h2 class="chapter-title">05. Future Evolution Path</h2>
+        <p class="section-desc">Logical system additions as request scale and team sizes grow.</p>
+        
+        <div class="timeline-roadmap" id="evolution-timeline">
+          <!-- Populated dynamically by advisor.js -->
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ─── BOTTOM ACTION BAR ─── -->
+  <footer class="bottom-action-bar">
+    <div class="bar-inner">
+      <div class="bar-left">
+        <a href="dashboard.html" class="bar-btn secondary" id="bar-back-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+          </svg>
+          Back to Dashboard
+        </a>
+      </div>
+      <div class="bar-right">
+        <a href="blueprint.html" class="bar-btn secondary" id="bar-blueprint-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="9" rx="1"/>
+            <rect x="14" y="3" width="7" height="5" rx="1"/>
+            <rect x="14" y="12" width="7" height="9" rx="1"/>
+            <rect x="3" y="16" width="7" height="5" rx="1"/>
+          </svg>
+          Open Architecture Map
+        </a>
+        <button class="bar-btn primary" id="btn-save-advice">
+          Save Advisor Insights
+        </button>
+      </div>
+    </div>
+  </footer>
+
+  <script src="api.js"></script>
+  <script src="advisor.js"></script>
+</body>
+</html>

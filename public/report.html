@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engineering Intelligence Report · BuildDNA</title>
+  <meta name="description" content="Publication-quality engineering intelligence report — architectural review, stack audit, and learning roadmap compiled dynamically from Wire agent analysis.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="report.css">
+</head>
+<body>
+
+  <header class="report-top-bar">
+    <div class="bar-left">
+      <a href="dashboard.html" class="back-link" id="header-back-btn">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        Dashboard
+      </a>
+      <span class="bar-sep">/</span>
+      <span class="bar-title">Engineering Intelligence Report</span>
+    </div>
+    <div class="bar-right">
+      <button class="action-btn secondary" id="btn-copy-report" title="Copy report to clipboard">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>
+        </svg>
+        Copy to Clipboard
+      </button>
+      <button class="action-btn secondary" id="btn-export-md" title="Download as Markdown">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/>
+        </svg>
+        Export Markdown
+      </button>
+      <button class="action-btn secondary" id="btn-share-report" title="Share report link">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+        </svg>
+        Share Report
+      </button>
+      <button class="action-btn primary" id="btn-print-pdf" title="Print or save as PDF">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/>
+        </svg>
+        Export PDF
+      </button>
+    </div>
+  </header>
+
+  <div class="report-layout">
+
+    <aside class="report-sidebar">
+      <nav class="toc-nav" aria-label="Table of contents">
+        <div class="toc-title">Table of Contents</div>
+        <div class="toc-links-list" id="toc-links">
+          <!-- Populated dynamically by report.js -->
+        </div>
+      </nav>
+    </aside>
+
+    <main class="document-container">
+      <article class="audit-document" id="audit-document">
+
+        <header class="doc-header" id="report-title">
+          <div class="doc-badge">Confidential · Engineering Audit</div>
+          <h1 class="doc-main-title">Engineering Intelligence Report</h1>
+
+          <div class="meta-block" id="meta-block">
+            <div class="meta-row">
+              <span class="meta-label">Project Name</span>
+              <span class="meta-val font-mono" id="doc-repo-name">—</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Repository URL</span>
+              <a class="meta-val font-mono meta-link" id="doc-repo-url" href="#" target="_blank" rel="noopener">—</a>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Analysis Date</span>
+              <span class="meta-val" id="doc-date">—</span>
+            </div>
+            <div class="meta-row meta-row--full">
+              <span class="meta-label">Technologies Detected</span>
+              <div class="meta-tech-pills" id="doc-tech-pills"></div>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Estimated Complexity</span>
+              <span class="meta-val" id="doc-complexity">—</span>
+            </div>
+            <div class="meta-row">
+              <span class="meta-label">Build Confidence Score</span>
+              <span class="meta-val meta-val--score" id="doc-confidence">—</span>
+            </div>
+          </div>
+        </header>
+
+        <section class="doc-section collapsible expanded" id="exec-summary">
+          <div class="section-header-click">
+            <h2 class="section-heading"><span class="section-num">01</span> Executive Summary</h2>
+            <span class="toggle-icon" aria-hidden="true">▼</span>
+          </div>
+          <div class="section-collapsible-body">
+            <div class="exec-grid">
+              <div class="exec-block">
+                <h3 class="exec-label">What the Project Does</h3>
+                <p id="summary-what-it-does"></p>
+              </div>
+              <div class="exec-block">
+                <h3 class="exec-label">Who It's For</h3>
+                <p id="summary-who-its-for"></p>
+              </div>
+              <div class="exec-block exec-block--wide">
+                <h3 class="exec-label">Overall Architecture</h3>
+                <p id="summary-architecture"></p>
+              </div>
+            </div>
+            <div class="summary-observations-card">
+              <h4>Key Engineering Observations</h4>
+              <ul class="observations-list" id="summary-observations"></ul>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section collapsible expanded" id="blueprint">
+          <div class="section-header-click">
+            <h2 class="section-heading"><span class="section-num">02</span> Engineering Blueprint</h2>
+            <span class="toggle-icon" aria-hidden="true">▼</span>
+          </div>
+          <div class="section-collapsible-body">
+            <div class="simplified-arch-box" id="blueprint-diagram"></div>
+            <div class="comm-summary-block">
+              <h4>Component Communication</h4>
+              <p id="blueprint-communication"></p>
+            </div>
+            <div class="data-flow-block">
+              <h4>Data Flow Sequence</h4>
+              <ol class="flow-list" id="blueprint-flows"></ol>
+            </div>
+          </div>
+        </section>
+
+        <section class="doc-section collapsible expanded" id="knowledge-library">
+          <div class="section-header-click">
+            <h2 class="section-heading"><span class="section-num">03</span> Technology Knowledge Library</h2>
+            <span class="toggle-icon" aria-hidden="true">▼</span>
+          </div>
+          <div class="section-collapsible-body">
+            <div class="tech-library-contents" id="tech-library-container"></div>
+          </div>
+        </section>
+
+        <section class="doc-section collapsible expanded" id="relationships">
+          <div class="section-header-click">
+            <h2 class="section-heading"><span class="section-num">04</span> Engineering Relationships</h2>
+            <span class="toggle-icon" aria-hidden="true">▼</span>
+          </div>
+          <div class="section-collapsible-body">
+            <div class="relationships-wrapper" id="relationships-container"></div>
+          </div>
+        </section>
+
+        <section class="doc-section collapsible expanded" id="recommendations">
+          <div class="section-header-click">
+            <h2 class="section-heading"><span class="section-num">05</span> Smart Recommendations</h2>
+            <span class="toggle-icon" aria-hidden="true">▼</span>
+          </div>
+          <div class="section-collapsible-body">
+            <div class="advisory-wrapper" id="advisory-container"></div>
+          </div>
+        </section>
+
+        <section class="doc-section collapsible expanded" id="roadmap">
+          <div class="section-header-click">
+            <h2 class="section-heading"><span class="section-num">06</span> Personalized Learning Roadmap</h2>
+            <span class="toggle-icon" aria-hidden="true">▼</span>
+          </div>
+          <div class="section-collapsible-body">
+            <p class="intro-text" id="roadmap-intro"></p>
+            <div class="roadmap-wrapper" id="roadmap-container"></div>
+          </div>
+        </section>
+
+        <section class="doc-section collapsible expanded" id="confidence-assess">
+          <div class="section-header-click">
+            <h2 class="section-heading"><span class="section-num">07</span> Build Confidence Assessment</h2>
+            <span class="toggle-icon" aria-hidden="true">▼</span>
+          </div>
+          <div class="section-collapsible-body">
+            <div class="confidence-grid" id="confidence-grid"></div>
+          </div>
+        </section>
+
+        <section class="doc-section collapsible expanded" id="future-evolution">
+          <div class="section-header-click">
+            <h2 class="section-heading"><span class="section-num">08</span> Future Evolution</h2>
+            <span class="toggle-icon" aria-hidden="true">▼</span>
+          </div>
+          <div class="section-collapsible-body">
+            <div class="evolution-list" id="evolution-container"></div>
+          </div>
+        </section>
+
+        <footer class="doc-signoff">
+          <div class="signoff-inner">
+            <div class="signoff-signature">
+              <div class="sig-title">Report ID</div>
+              <div class="sig-value" id="signoff-session">—</div>
+            </div>
+            <div class="signoff-signature">
+              <div class="sig-title">Compiled By</div>
+              <div class="sig-value">Wire Agent Orchestrator</div>
+            </div>
+            <div class="signoff-signature">
+              <div class="sig-title">Platform</div>
+              <div class="sig-value">BuildDNA Intelligence Suite</div>
+            </div>
+          </div>
+          <p class="signoff-footer">This report was compiled dynamically from structured Wire agent analysis. BuildDNA © 2026.</p>
+        </footer>
+
+      </article>
+    </main>
+
+  </div>
+
+  <script src="api.js"></script>
+  <script src="report.js"></script>
+</body>
+</html>

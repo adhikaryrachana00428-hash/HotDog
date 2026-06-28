@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Technology Knowledge Card · HotDog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="knowledge-card.css">
+</head>
+<body>
+  <header class="card-header">
+    <div class="header-inner">
+      <div class="header-left">
+        <a href="dashboard.html" class="back-link" id="back-link" aria-label="Back to dashboard">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 3L5 8l5 5"/>
+          </svg>
+          Dashboard
+        </a>
+        <span class="header-separator">/</span>
+        <span class="breadcrumbs">
+          <span class="breadcrumb-item" id="repo-breadcrumb">Analyzed project</span>
+          <span class="breadcrumb-arrow">/</span>
+          <span class="breadcrumb-item">Knowledge Library</span>
+          <span class="breadcrumb-arrow">/</span>
+          <span class="breadcrumb-item active" id="tech-breadcrumb">Technology</span>
+        </span>
+      </div>
+      <div class="header-right">
+        <div class="wire-badge">
+          <span class="wire-dot"></span>
+          <span>Wire Orchestrated</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="card-layout">
+    <aside class="card-sidebar">
+      <nav class="spy-nav" id="knowledge-nav">
+        <div class="spy-title">Module Chapters</div>
+      </nav>
+    </aside>
+
+    <main class="card-content" id="knowledge-content">
+      <section class="tech-hero">
+        <div class="tech-hero-logo" id="tech-logo">--</div>
+        <div class="tech-hero-meta">
+          <div class="tech-category-pill" id="tech-category">Loading</div>
+          <h1 class="tech-name" id="tech-name">Loading technology</h1>
+          <p class="tech-headline" id="tech-role">Waiting for EngineeringReport data.</p>
+        </div>
+      </section>
+
+      <div class="tech-stats">
+        <div class="stat-item">
+          <span class="stat-label">Detected Category</span>
+          <span class="stat-val" id="stat-category">--</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Project Fit</span>
+          <span class="stat-val" id="stat-fit">Generated</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Related Stack</span>
+          <span class="stat-val" id="stat-related">--</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-label">Learn Next</span>
+          <span class="stat-val" id="stat-learn">--</span>
+        </div>
+      </div>
+
+      <div id="knowledge-sections"></div>
+    </main>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="knowledge-card.js"></script>
+</body>
+</html>

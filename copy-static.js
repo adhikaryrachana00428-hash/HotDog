@@ -6,14 +6,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const srcDir = __dirname;
-const destDir = path.join(__dirname, 'dist');
+const destDir = path.join(__dirname, 'public');
 
-// Ensure dist directory exists
+// Ensure public directory exists
 if (!fs.existsSync(destDir)) {
   fs.mkdirSync(destDir, { recursive: true });
 }
 
-// Files in the root directory to copy to dist
+// Files in the root directory to copy to public
 const files = fs.readdirSync(srcDir);
 
 files.forEach(file => {
@@ -28,6 +28,6 @@ files.forEach(file => {
   // Copy html, css, js files
   if (file.endsWith('.html') || file.endsWith('.css') || (file.endsWith('.js') && !file.endsWith('.test.js'))) {
     fs.copyFileSync(srcPath, destPath);
-    console.log(`Copied ${file} to dist/`);
+    console.log(`Copied ${file} to public/`);
   }
 });
