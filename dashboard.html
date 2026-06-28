@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>next.js — Engineering Intelligence Report · HotDog</title>
+  <meta name="description" content="BuildDNA Engineering Intelligence Report for vercel/next.js — architecture, technology knowledge, recommendations, and learning roadmap." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="dashboard.css" />
+</head>
+<body>
+
+  <!-- ─── TOP NAV ─── -->
+  <nav class="topnav" id="topnav" aria-label="Main navigation">
+    <div class="topnav-inner">
+      <div class="topnav-left">
+
+          <svg width="22" height="22" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+            <rect width="28" height="28" rx="7" fill="#0F0F0F"/>
+            <path d="M8 7h4v14H8V7zM16 7h4v14h-4V7z" fill="#F5F5F5" opacity="0.9"/>
+            <path d="M12 11h4v2h-4v-2zM12 15h4v2h-4v-2z" fill="#7C3AED"/>
+          </svg>
+<span class="logo-text">HotDog</span>
+        </a>
+        <span class="topnav-sep" aria-hidden="true">/</span>
+        <div class="topnav-project">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="github-icon">
+            <path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10Z"/>
+          </svg>
+          <span class="topnav-repo">vercel / next.js</span>
+        </div>
+      </div>
+      <div class="topnav-right">
+        <div class="analysis-fresh-badge" title="Analysis completed less than a minute ago">
+          <span class="fresh-dot" aria-hidden="true"></span>
+          Fresh Analysis
+        </div>
+        <button class="btn btn-ghost btn-sm" id="export-btn" aria-label="Export Engineering Report">
+          <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M7 1v8M4 6l3 3 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M1.5 10v1a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+          Export Report
+        </button>
+        <a href="index.html" class="btn btn-ghost btn-sm">New Analysis</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="workspace" id="workspace">
+
+    <!-- ═══════════════════════════════════════
+         LEFT SIDEBAR — Navigation
+    ════════════════════════════════════════ -->
+    <aside class="sidebar-left" id="sidebar-left" aria-label="Report navigation">
+      <div class="sidebar-inner">
+
+        <div class="sidebar-section-label">Report Sections</div>
+
+        <nav class="sidebar-nav" role="navigation" aria-label="Report sections">
+          <button class="nav-item active" data-section="summary" aria-current="page">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="1" y="1" width="13" height="13" rx="2.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 5.5h7M4 8h5M4 10.5h6" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+            </span>
+            <span class="nav-label">Executive Summary</span>
+          </button>
+
+          <button class="nav-item" data-section="blueprint">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><rect x="1" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="9" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="9" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="9" y="9" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><path d="M6 3.5h3M3.5 6v3M11.5 6v3M6 11.5h3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+            </span>
+            <span class="nav-label">Engineering Blueprint</span>
+          </button>
+
+          <button class="nav-item" data-section="knowledge">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 2h4v11H2V2zM7 2h6l-2 4 2 4H7" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="nav-label">Knowledge Library</span>
+            <span class="nav-badge">14</span>
+          </button>
+
+          <button class="nav-item" data-section="relationships">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="3.5" cy="7.5" r="2" stroke="currentColor" stroke-width="1.2"/><circle cx="11.5" cy="3" r="2" stroke="currentColor" stroke-width="1.2"/><circle cx="11.5" cy="12" r="2" stroke="currentColor" stroke-width="1.2"/><path d="M5.5 6.5l4-2.5M5.5 8.5l4 2.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+            </span>
+            <span class="nav-label">Engineering Relationships</span>
+          </button>
+
+          <button class="nav-item" data-section="decisions">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 11l4-4 3 3 4-6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="nav-label">Engineering Decisions</span>
+          </button>
+
+          <button class="nav-item" data-section="recommendations">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.2"/><path d="M7.5 4.5v3.5l2 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="nav-label">Smart Recommendations</span>
+            <span class="nav-badge accent">6</span>
+          </button>
+
+          <button class="nav-item" data-section="tools">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M9.5 1.5A3.5 3.5 0 0 1 13 5c0 .8-.27 1.54-.72 2.12L4.5 14.5l-3-3 7.38-7.78A3.48 3.48 0 0 1 9.5 1.5z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="nav-label">Hidden Dev Tools</span>
+            <span class="nav-badge accent">9</span>
+          </button>
+
+          <button class="nav-item" data-section="roadmap">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 11V5l5.5-3 5.5 3v6" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M5.5 15v-5h4v5" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            </span>
+            <span class="nav-label">Learning Roadmap</span>
+          </button>
+
+          <button class="nav-item" data-section="report">
+            <span class="nav-icon" aria-hidden="true">
+              <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M3 1.5h6l3 3v9H3v-12z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M9 1.5V4.5H12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 7h5M5 9.5h3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+            </span>
+            <span class="nav-label">Engineering Report</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-divider" aria-hidden="true"></div>
+
+        <div class="sidebar-section-label">Generated By</div>
+        <div class="wire-info-card">
+          <div class="wire-info-top">
+            <span class="wire-name">Wire</span>
+            <span class="wire-version">v2.1</span>
+          </div>
+          <p class="wire-desc">Multi-agent orchestration layer. 8 specialized agents collaborated on this report.</p>
+          <div class="wire-agents-list" aria-label="Contributing agents">
+            <span class="agent-tag">Scraper</span>
+            <span class="agent-tag">Planner</span>
+            <span class="agent-tag">Tech Detector</span>
+            <span class="agent-tag">Architect</span>
+            <span class="agent-tag">Doc Writer</span>
+            <span class="agent-tag">Advisor</span>
+            <span class="agent-tag">Roadmap</span>
+            <span class="agent-tag">Reporter</span>
+          </div>
+        </div>
+
+      </div>
+    </aside>
+
+    <!-- ═══════════════════════════════════════
+         CENTER — Content Workspace
+    ════════════════════════════════════════ -->
+    <main class="content-main" id="content-main" aria-label="Engineering intelligence workspace">
+
+      <!-- ── SECTION: Executive Summary ── -->
+      <section class="content-section active" id="section-summary" aria-labelledby="summary-title">
+
+        <!-- Hero card -->
+        <div class="hero-card">
+          <div class="hero-card-top">
+            <div class="hero-card-label">Project Purpose</div>
+            <div class="dna-tags" aria-label="Engineering DNA tags">
+              <!-- Tags populated dynamically from the shared report schema -->
+            </div>
+          </div>
+          <h1 class="hero-card-title" id="summary-title">Loading project overview…</h1>
+          <p class="hero-card-desc">
+            A data-driven engineering assessment is being generated for the selected repository. This dashboard updates automatically once the report is available.
+          </p>
+          <p class="hero-card-desc" style="margin-top: 12px;">
+            The summary, architecture, technology library, and roadmap below are sourced from the same shared engineering report schema used across the entire application.
+          </p>
+          <div class="hero-card-footer">
+            <div class="hero-quick-stat">
+              <span class="hqs-num">14</span>
+              <span class="hqs-label">Technologies</span>
+            </div>
+            <div class="hero-quick-stat">
+              <span class="hqs-num">127</span>
+              <span class="hqs-label">Dependencies</span>
+            </div>
+            <div class="hero-quick-stat">
+              <span class="hqs-num">8</span>
+              <span class="hqs-label">External APIs</span>
+            </div>
+            <div class="hero-quick-stat">
+              <span class="hqs-num">23</span>
+              <span class="hqs-label">Components</span>
+            </div>
+            <div class="hero-quick-stat">
+              <span class="hqs-num">15</span>
+              <span class="hqs-label">Opportunities</span>
+            </div>
+            <div class="hero-quick-stat">
+              <span class="hqs-num">42</span>
+              <span class="hqs-label">Learning Modules</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Architecture -->
+        <div class="content-block">
+          <div class="block-header">
+            <h2 class="block-title">Quick Architecture Preview</h2>
+            <button class="block-action" data-goto="blueprint" aria-label="View full Engineering Blueprint">View full blueprint →</button>
+          </div>
+          <div class="arch-flow" role="img" aria-label="Application architecture flow diagram"></div>
+        </div>
+
+        <!-- Engineering Health -->
+        <div class="content-block">
+          <div class="block-header">
+            <h2 class="block-title">Engineering Health</h2>
+          </div>
+          <div class="health-grid">
+            <div class="health-card">
+              <div class="health-card-top">
+                <span class="health-icon">📝</span>
+                <span class="health-label">Documentation Quality</span>
+              </div>
+              <div class="health-bar-track"><div class="health-bar-fill" style="--fill:88%;--color:#10B981"></div></div>
+              <span class="health-descriptor">Excellent</span>
+            </div>
+            <div class="health-card">
+              <div class="health-card-top">
+                <span class="health-icon">🏛️</span>
+                <span class="health-label">Architecture Complexity</span>
+              </div>
+              <div class="health-bar-track"><div class="health-bar-fill" style="--fill:72%;--color:#F59E0B"></div></div>
+              <span class="health-descriptor">Advanced</span>
+            </div>
+            <div class="health-card">
+              <div class="health-card-top">
+                <span class="health-icon">🎓</span>
+                <span class="health-label">Learning Difficulty</span>
+              </div>
+              <div class="health-bar-track"><div class="health-bar-fill" style="--fill:65%;--color:#F59E0B"></div></div>
+              <span class="health-descriptor">Intermediate</span>
+            </div>
+            <div class="health-card">
+              <div class="health-card-top">
+                <span class="health-icon">🔧</span>
+                <span class="health-label">Maintainability</span>
+              </div>
+              <div class="health-bar-track"><div class="health-bar-fill" style="--fill:91%;--color:#10B981"></div></div>
+              <span class="health-descriptor">Excellent</span>
+            </div>
+            <div class="health-card">
+              <div class="health-card-top">
+                <span class="health-icon">✨</span>
+                <span class="health-label">Modern Technology Usage</span>
+              </div>
+              <div class="health-bar-track"><div class="health-bar-fill" style="--fill:95%;--color:#10B981"></div></div>
+              <span class="health-descriptor">Cutting Edge</span>
+            </div>
+            <div class="health-card">
+              <div class="health-card-top">
+                <span class="health-icon">💡</span>
+                <span class="health-label">Improvement Opportunities</span>
+              </div>
+              <div class="health-bar-track"><div class="health-bar-fill" style="--fill:40%;--color:#3B82F6"></div></div>
+              <span class="health-descriptor">15 Found</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- What You'll Learn -->
+        <div class="content-block">
+          <div class="block-header">
+            <h2 class="block-title">What You'll Learn</h2>
+            <span class="block-sub">42 learning modules generated</span>
+          </div>
+          <div class="learn-grid" id="learn-highlights">
+          <div class="learn-card">
+            <span class="learn-check" aria-hidden="true">✓</span>
+            <span>Learning highlights are populated from the shared Engineering Report.</span>
+          </div>
+        </div>
+        </div>
+
+      </section>
+
+      <!-- ── SECTION: Engineering Blueprint ── -->
+      <section class="content-section" id="section-blueprint" aria-labelledby="blueprint-title">
+        <div class="section-page-header">
+          <h1 class="section-page-title" id="blueprint-title">Engineering Blueprint</h1>
+          <p class="section-page-sub">A complete map of how this software system is structured and how its layers communicate.</p>
+        </div>
+
+        <div class="content-block">
+          <div class="block-header"><h2 class="block-title">Application Architecture</h2></div>
+          <div class="blueprint-canvas" role="img" aria-label="Full application architecture diagram">
+            <div class="bp-layer">
+              <div class="bp-layer-label">Client Layer</div>
+              <div class="bp-nodes-row">
+                <div class="bp-node bp-node--primary">
+                  <span class="bp-node-icon">🌐</span>
+                  <span class="bp-node-name">Browser</span>
+                  <span class="bp-node-desc">React hydration</span>
+                </div>
+                <div class="bp-node bp-node--primary">
+                  <span class="bp-node-icon">📱</span>
+                  <span class="bp-node-name">Mobile Web</span>
+                  <span class="bp-node-desc">Responsive PWA</span>
+                </div>
+              </div>
+            </div>
+            <div class="bp-arrow-down" aria-hidden="true">
+              <div class="bp-arrow-line"></div>
+              <div class="bp-arrow-label">HTTP / WebSocket</div>
+            </div>
+            <div class="bp-layer">
+              <div class="bp-layer-label">Edge Layer</div>
+              <div class="bp-nodes-row">
+                <div class="bp-node bp-node--edge">
+                  <span class="bp-node-icon">⚡</span>
+                  <span class="bp-node-name">Vercel Edge</span>
+                  <span class="bp-node-desc">CDN + Middleware</span>
+                </div>
+                <div class="bp-node bp-node--edge">
+                  <span class="bp-node-icon">🔐</span>
+                  <span class="bp-node-name">Auth Middleware</span>
+                  <span class="bp-node-desc">Clerk session</span>
+                </div>
+              </div>
+            </div>
+            <div class="bp-arrow-down" aria-hidden="true">
+              <div class="bp-arrow-line"></div>
+              <div class="bp-arrow-label">Server Components / RSC</div>
+            </div>
+            <div class="bp-layer">
+              <div class="bp-layer-label">Application Layer</div>
+              <div class="bp-nodes-row">
+                <div class="bp-node bp-node--app">
+                  <span class="bp-node-icon">⚛️</span>
+                  <span class="bp-node-name">Next.js App Router</span>
+                  <span class="bp-node-desc">Pages + Layouts</span>
+                </div>
+                <div class="bp-node bp-node--app">
+                  <span class="bp-node-icon">🔌</span>
+                  <span class="bp-node-name">API Routes</span>
+                  <span class="bp-node-desc">REST + Server Actions</span>
+                </div>
+                <div class="bp-node bp-node--app">
+                  <span class="bp-node-icon">🎨</span>
+                  <span class="bp-node-name">UI Components</span>
+                  <span class="bp-node-desc">Tailwind + shadcn</span>
+                </div>
+              </div>
+            </div>
+            <div class="bp-arrow-down" aria-hidden="true">
+              <div class="bp-arrow-line"></div>
+              <div class="bp-arrow-label">Prisma ORM / tRPC</div>
+            </div>
+            <div class="bp-layer">
+              <div class="bp-layer-label">Data Layer</div>
+              <div class="bp-nodes-row">
+                <div class="bp-node bp-node--data">
+                  <span class="bp-node-icon">🐘</span>
+                  <span class="bp-node-name">PostgreSQL</span>
+                  <span class="bp-node-desc">Primary datastore</span>
+                </div>
+                <div class="bp-node bp-node--data">
+                  <span class="bp-node-icon">⚡</span>
+                  <span class="bp-node-name">Redis</span>
+                  <span class="bp-node-desc">Cache + Sessions</span>
+                </div>
+                <div class="bp-node bp-node--data">
+                  <span class="bp-node-icon">📂</span>
+                  <span class="bp-node-name">Blob Storage</span>
+                  <span class="bp-node-desc">Vercel Blob</span>
+                </div>
+              </div>
+            </div>
+            <div class="bp-arrow-down" aria-hidden="true">
+              <div class="bp-arrow-line"></div>
+              <div class="bp-arrow-label">SDK / REST API</div>
+            </div>
+            <div class="bp-layer">
+              <div class="bp-layer-label">External Services</div>
+              <div class="bp-nodes-row">
+                <div class="bp-node bp-node--external">
+                  <span class="bp-node-icon">👤</span>
+                  <span class="bp-node-name">Clerk</span>
+                  <span class="bp-node-desc">Authentication</span>
+                </div>
+                <div class="bp-node bp-node--external">
+                  <span class="bp-node-icon">💳</span>
+                  <span class="bp-node-name">Stripe</span>
+                  <span class="bp-node-desc">Payments</span>
+                </div>
+                <div class="bp-node bp-node--external">
+                  <span class="bp-node-icon">📧</span>
+                  <span class="bp-node-name">Resend</span>
+                  <span class="bp-node-desc">Transactional email</span>
+                </div>
+                <div class="bp-node bp-node--external">
+                  <span class="bp-node-icon">🤖</span>
+                  <span class="bp-node-name">OpenAI</span>
+                  <span class="bp-node-desc">AI features</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-block">
+          <div class="block-header"><h2 class="block-title">Data Flow Summary</h2></div>
+          <div class="flow-summary-list">
+            <div class="flow-item">
+              <span class="flow-num">1</span>
+              <div><strong>Request arrives</strong> at Vercel Edge Network, which checks the Clerk session token via middleware before the request ever touches the app server.</div>
+            </div>
+            <div class="flow-item">
+              <span class="flow-num">2</span>
+              <div><strong>Next.js App Router</strong> renders Server Components on the server, fetching data directly from PostgreSQL via Prisma — no client roundtrip needed for initial data.</div>
+            </div>
+            <div class="flow-item">
+              <span class="flow-num">3</span>
+              <div><strong>Redis</strong> sits between the API and the database, caching expensive queries and storing session state to keep response times under 100ms.</div>
+            </div>
+            <div class="flow-item">
+              <span class="flow-num">4</span>
+              <div><strong>Server Actions</strong> handle mutations (form submissions, state updates) directly from Client Components without building explicit API endpoints.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── SECTION: Knowledge Library ── -->
+      <section class="content-section" id="section-knowledge" aria-labelledby="knowledge-title">
+        <div class="section-page-header">
+          <h1 class="section-page-title" id="knowledge-title">Engineering Knowledge Library</h1>
+          <p class="section-page-sub">14 technology knowledge cards generated — not just a list of tools, but a deep understanding of each engineering choice and why it was made.</p>
+        </div>
+
+        <div class="tech-filter-bar" role="group" aria-label="Filter knowledge cards by category">
+          <button class="filter-btn active" data-filter="all">All <span class="filter-count">14</span></button>
+          <button class="filter-btn" data-filter="frontend">Frontend <span class="filter-count">4</span></button>
+          <button class="filter-btn" data-filter="backend">Backend <span class="filter-count">3</span></button>
+          <button class="filter-btn" data-filter="database">Database <span class="filter-count">2</span></button>
+          <button class="filter-btn" data-filter="auth">Auth <span class="filter-count">1</span></button>
+          <button class="filter-btn" data-filter="deployment">Deploy <span class="filter-count">2</span></button>
+          <button class="filter-btn" data-filter="devtools">Dev Tools <span class="filter-count">2</span></button>
+        </div>
+
+        <div class="tech-grid" id="tech-grid">
+          <!-- Technology cards are rendered dynamically from the shared report schema -->
+        </div>
+      </section>
+
+      <!-- ── SECTION: Engineering Relationships ── -->
+      <section class="content-section" id="section-relationships" aria-labelledby="rel-title">
+        <div class="section-page-header">
+          <h1 class="section-page-title" id="rel-title">Engineering Relationships</h1>
+          <p class="section-page-sub">How every component communicates with the rest of the system — and why those connections matter.</p>
+        </div>
+
+        <div class="content-block">
+          <div class="block-header"><h2 class="block-title">Key Dependency Chains</h2></div>
+          <div class="rel-chains">
+            <!-- Relationship cards are rendered dynamically from the shared report schema -->
+
+                <span class="rcp-arrow">→</span>
+                <span class="rcp-node rcp-node--highlight">Vercel Middleware</span>
+                <span class="rcp-arrow">→</span>
+                <span class="rcp-node">Clerk SDK</span>
+                <span class="rcp-arrow">→</span>
+                <span class="rcp-node">Session Cookie</span>
+                <span class="rcp-arrow">→</span>
+                <span class="rcp-node rcp-node--success">Protected Page</span>
+              </div>
+              <p class="rel-chain-desc">Every request is intercepted at the edge before reaching Next.js. Clerk validates the session token — unauthenticated requests are redirected to the login page without ever touching application code.</p>
+            </div>
+
+            <div class="rel-chain-card">
+              <div class="rel-chain-title">Data Mutation Flow</div>
+              <div class="rel-chain-path">
+                <span class="rcp-node">UI Form</span>
+                <span class="rcp-arrow">→</span>
+                <span class="rcp-node">Server Action</span>
+                <span class="rcp-arrow">→</span>
+                <span class="rcp-node rcp-node--highlight">Zod Validation</span>
+                <span class="rcp-arrow">→</span>
+                <span class="rcp-node">Prisma Client</span>
+                <span class="rcp-arrow">→</span>
+                <span class="rcp-node rcp-node--success">PostgreSQL</span>
+              </div>
+              <p class="rel-chain-desc">Form submissions bypass traditional REST endpoints. Server Actions run on the server in response to a POST request, validated by Zod before any database write occurs — eliminating an entire class of injection vulnerabilities.</p>
+            </div>
+
+            <div class="rel-chain-card">
+              <div class="rel-chain-title">Cache Read Flow</div>
+              <div class="rel-chain-path">
+                <span class="rcp-node">API Request</span>
+                <span class="rcp-arrow">→</span>
+                <span class="rcp-node rcp-node--highlight">Redis Check</span>
+                <span class="rcp-arrow">→</span>
+                <span class="rcp-node rcp-node--warning">Cache Miss?</span>
+                <span class="rcp-arrow">→</span>
+                <span class="rcp-node">PostgreSQL</span>
+                <span class="rcp-arrow">→</span>
+                <span class="rcp-node rcp-node--success">Cache + Return</span>
+              </div>
+              <p class="rel-chain-desc">The API always checks Redis first. On a cache miss, it queries PostgreSQL, stores the result in Redis with a TTL, and returns the data. Subsequent identical requests return in microseconds instead of milliseconds.</p>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- ── SECTION: Engineering Decisions ── -->
+      <section class="content-section" id="section-decisions" aria-labelledby="decisions-title">
+        <div class="section-page-header">
+          <h1 class="section-page-title" id="decisions-title">Engineering Decisions</h1>
+          <p class="section-page-sub">The reasoning behind each major technology choice — including the tradeoffs that were consciously accepted.</p>
+        </div>
+
+        <div class="decisions-list">
+
+          <div class="decision-card">
+            <div class="decision-header">
+              <span class="decision-num">01</span>
+              <div>
+                <h3 class="decision-title">Chose Clerk over Auth.js (NextAuth)</h3>
+                <span class="decision-impact impact-high">High Impact Decision</span>
+              </div>
+            </div>
+            <div class="decision-body">
+              <div class="decision-col">
+                <div class="decision-col-title">✅ Advantages Gained</div>
+                <ul class="decision-points">
+                  <li>Zero auth infrastructure to maintain</li>
+                  <li>Pre-built UI components (sign-in, sign-up, user profile)</li>
+                  <li>Organizations and multi-tenancy out of the box</li>
+                  <li>Webhook events for user lifecycle management</li>
+                </ul>
+              </div>
+              <div class="decision-col">
+                <div class="decision-col-title">⚠️ Tradeoffs Accepted</div>
+                <ul class="decision-points tradeoff">
+                  <li>External service dependency for all user sessions</li>
+                  <li>Vendor lock-in makes future migration complex</li>
+                  <li>Paid tier required for production at scale</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="decision-card">
+            <div class="decision-header">
+              <span class="decision-num">02</span>
+              <div>
+                <h3 class="decision-title">App Router over Pages Router</h3>
+                <span class="decision-impact impact-high">Architectural Decision</span>
+              </div>
+            </div>
+            <div class="decision-body">
+              <div class="decision-col">
+                <div class="decision-col-title">✅ Advantages Gained</div>
+                <ul class="decision-points">
+                  <li>Server Components reduce client-side JavaScript</li>
+                  <li>Nested layouts eliminate prop-drilling across routes</li>
+                  <li>Streaming and Suspense for better perceived performance</li>
+                  <li>Server Actions for type-safe form handling</li>
+                </ul>
+              </div>
+              <div class="decision-col">
+                <div class="decision-col-title">⚠️ Tradeoffs Accepted</div>
+                <ul class="decision-points tradeoff">
+                  <li>Steeper learning curve for the team</li>
+                  <li>Fewer community examples vs. Pages Router</li>
+                  <li>Some ecosystem libraries not yet compatible</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="decision-card">
+            <div class="decision-header">
+              <span class="decision-num">03</span>
+              <div>
+                <h3 class="decision-title">Prisma as the Database Interface</h3>
+                <span class="decision-impact impact-medium">Medium Impact Decision</span>
+              </div>
+            </div>
+            <div class="decision-body">
+              <div class="decision-col">
+                <div class="decision-col-title">✅ Advantages Gained</div>
+                <ul class="decision-points">
+                  <li>Auto-generated TypeScript types from schema</li>
+                  <li>Schema migrations with version history</li>
+                  <li>Readable query builder instead of raw SQL</li>
+                  <li>Prisma Studio for visual database browsing</li>
+                </ul>
+              </div>
+              <div class="decision-col">
+                <div class="decision-col-title">⚠️ Tradeoffs Accepted</div>
+                <ul class="decision-points tradeoff">
+                  <li>N+1 query problem if relations aren't handled carefully</li>
+                  <li>Cold start overhead in serverless environments</li>
+                  <li>Complex queries sometimes need raw SQL fallback</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── SECTION: Smart Recommendations ── -->
+      <section class="content-section" id="section-recommendations" aria-labelledby="rec-title">
+        <div class="section-page-header">
+          <h1 class="section-page-title" id="rec-title">Smart Recommendations</h1>
+          <p class="section-page-sub">6 technology alternatives and architectural improvements identified specifically for this project.</p>
+        </div>
+
+        <div class="rec-list">
+
+          <div class="rec-card rec-card--upgrade">
+            <div class="rec-header">
+              <span class="rec-type-badge rec-type--upgrade">Upgrade</span>
+              <h3 class="rec-title">Consider Drizzle ORM as a Prisma Alternative</h3>
+            </div>
+            <p class="rec-body">Drizzle is a newer, lighter ORM with a SQL-like query builder and zero cold start overhead — a significant advantage in serverless environments where Prisma's connection pooling can cause latency spikes.</p>
+            <div class="rec-meta">
+              <span class="rec-effort effort-medium">Medium migration effort</span>
+              <span class="rec-benefit">↑ Performance · ↓ Cold starts</span>
+            </div>
+          </div>
+
+          <div class="rec-card rec-card--alternative">
+            <div class="rec-header">
+              <span class="rec-type-badge rec-type--alternative">Alternative</span>
+              <h3 class="rec-title">Better Auth instead of Clerk for Long-term Projects</h3>
+            </div>
+            <p class="rec-body">Better Auth is a newer open-source auth library that runs entirely on your own infrastructure. It eliminates Clerk's vendor lock-in and cost at scale while providing comparable features including OAuth, sessions, and organization management.</p>
+            <div class="rec-meta">
+              <span class="rec-effort effort-high">High migration effort</span>
+              <span class="rec-benefit">↓ Cost · ↑ Data ownership</span>
+            </div>
+          </div>
+
+          <div class="rec-card rec-card--additive">
+            <div class="rec-header">
+              <span class="rec-type-badge rec-type--additive">Add</span>
+              <h3 class="rec-title">Add Playwright for End-to-End Testing</h3>
+            </div>
+            <p class="rec-body">The project currently has unit tests but no E2E coverage. Playwright integrates with Next.js natively and can test the full authentication flow, form submissions, and payment processes in a real browser environment.</p>
+            <div class="rec-meta">
+              <span class="rec-effort effort-low">Low implementation effort</span>
+              <span class="rec-benefit">↑ Confidence · ↓ Regression risk</span>
+            </div>
+          </div>
+
+          <div class="rec-card rec-card--additive">
+            <div class="rec-header">
+              <span class="rec-type-badge rec-type--additive">Add</span>
+              <h3 class="rec-title">OpenTelemetry for Observability</h3>
+            </div>
+            <p class="rec-body">The application has no distributed tracing. Adding OpenTelemetry with a provider like Axiom or Grafana Cloud would let you trace a single user request through Middleware → Server Action → Prisma → PostgreSQL → Redis.</p>
+            <div class="rec-meta">
+              <span class="rec-effort effort-medium">Medium implementation effort</span>
+              <span class="rec-benefit">↑ Debuggability · ↑ Production visibility</span>
+            </div>
+          </div>
+
+          <div class="rec-card rec-card--upgrade">
+            <div class="rec-header">
+              <span class="rec-type-badge rec-type--upgrade">Optimize</span>
+              <h3 class="rec-title">Replace Redis with Upstash for Serverless Compatibility</h3>
+            </div>
+            <p class="rec-body">Traditional Redis requires a persistent connection, which is problematic in serverless functions. Upstash provides a REST-based Redis API that works perfectly with Vercel's serverless model and charges per request rather than per instance.</p>
+            <div class="rec-meta">
+              <span class="rec-effort effort-low">Low migration effort</span>
+              <span class="rec-benefit">↓ Cost · ↑ Serverless compatibility</span>
+            </div>
+          </div>
+
+          <div class="rec-card rec-card--additive">
+            <div class="rec-header">
+              <span class="rec-type-badge rec-type--additive">Add</span>
+              <h3 class="rec-title">Turborepo for Monorepo Management</h3>
+            </div>
+            <p class="rec-body">As the codebase grows, splitting into a Turborepo monorepo would allow sharing TypeScript types, Zod schemas, and utility functions between the web app and any future mobile or API-only services.</p>
+            <div class="rec-meta">
+              <span class="rec-effort effort-medium">Medium implementation effort</span>
+              <span class="rec-benefit">↑ Scalability · ↑ Code reuse</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── SECTION: Hidden Tools ── -->
+      <section class="content-section" id="section-tools" aria-labelledby="tools-title">
+        <div class="section-page-header">
+          <h1 class="section-page-title" id="tools-title">Hidden Developer Tools</h1>
+          <p class="section-page-sub">9 developer tools embedded in this project that most developers overlook. Each one is worth understanding separately.</p>
+        </div>
+
+        <div class="tools-grid">
+
+          <div class="tool-card">
+            <div class="tool-icon">🔍</div>
+            <h3 class="tool-name">Prisma Studio</h3>
+            <p class="tool-desc">A visual database browser bundled with Prisma. Run <code>npx prisma studio</code> to get a full GUI for querying and editing your database rows without writing SQL.</p>
+            <span class="tool-command">npx prisma studio</span>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">📊</div>
+            <h3 class="tool-name">Vercel Analytics</h3>
+            <p class="tool-desc">Privacy-first web analytics with Core Web Vitals monitoring — already configured in the project but disabled by default. One environment variable enables it.</p>
+            <span class="tool-command">NEXT_PUBLIC_ANALYTICS=1</span>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">💳</div>
+            <h3 class="tool-name">Stripe CLI</h3>
+            <p class="tool-desc">A local proxy that forwards Stripe webhook events to your development server so you can test the full payment flow on localhost without public tunnels.</p>
+            <span class="tool-command">stripe listen --forward-to localhost:3000</span>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">🐘</div>
+            <h3 class="tool-name">Prisma Migrate</h3>
+            <p class="tool-desc">Database migration tool that tracks schema changes in version-controlled SQL files. Changes to your Prisma schema are applied incrementally and safely.</p>
+            <span class="tool-command">npx prisma migrate dev</span>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">🔐</div>
+            <h3 class="tool-name">Clerk Dashboard</h3>
+            <p class="tool-desc">A real-time user management interface in the Clerk web console. View active sessions, impersonate users, manage organizations, and test auth flows — without touching code.</p>
+            <span class="tool-command">dashboard.clerk.com</span>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">📦</div>
+            <h3 class="tool-name">Bundle Analyzer</h3>
+            <p class="tool-desc">Built-in Next.js bundle analysis that generates a visual treemap of what JavaScript is being shipped to the browser. Run it before each release to catch accidental bloat.</p>
+            <span class="tool-command">ANALYZE=true npm run build</span>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">⚡</div>
+            <h3 class="tool-name">Next.js DevTools</h3>
+            <p class="tool-desc">Browser extension that visualizes Server Component boundaries, shows which components are cached vs. dynamic, and displays Suspense boundaries in the React tree.</p>
+            <span class="tool-command">Chrome Extension</span>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">🧹</div>
+            <h3 class="tool-name">ESLint + Prettier</h3>
+            <p class="tool-desc">Pre-configured with Next.js-specific rules, TypeScript checking, and import ordering. The .eslintrc.json enforces consistent code style across the entire team automatically.</p>
+            <span class="tool-command">npx eslint . --fix</span>
+          </div>
+
+          <div class="tool-card">
+            <div class="tool-icon">🧪</div>
+            <h3 class="tool-name">Vitest</h3>
+            <p class="tool-desc">Jest-compatible unit test runner configured for Next.js with built-in TypeScript support and 10x faster test execution than Jest due to Vite's build pipeline.</p>
+            <span class="tool-command">npx vitest</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── SECTION: Learning Roadmap ── -->
+      <section class="content-section" id="section-roadmap" aria-labelledby="roadmap-title">
+        <div class="section-page-header">
+          <h1 class="section-page-title" id="roadmap-title">Learning Roadmap</h1>
+          <p class="section-page-sub">A structured 6-phase learning journey to go from understanding to mastery of this project's engineering stack.</p>
+        </div>
+
+        <div class="roadmap-timeline">
+
+          <div class="roadmap-phase">
+            <div class="phase-header">
+              <div class="phase-num">Phase 1</div>
+              <div class="phase-meta">
+                <h3 class="phase-title">Foundation — Core Concepts</h3>
+                <span class="phase-duration">~1 week</span>
+              </div>
+            </div>
+            <div class="phase-items">
+              <div class="phase-item"><span class="pi-icon">📖</span> Understand what Next.js App Router is and how it differs from Pages Router</div>
+              <div class="phase-item"><span class="pi-icon">📖</span> Learn TypeScript basics — types, interfaces, generics</div>
+              <div class="phase-item"><span class="pi-icon">🛠️</span> Set up the development environment using docker-compose</div>
+              <div class="phase-item"><span class="pi-icon">🛠️</span> Run the project locally and explore the file structure</div>
+            </div>
+          </div>
+
+          <div class="roadmap-connector" aria-hidden="true">
+            <div class="rc-line"></div>
+          </div>
+
+          <div class="roadmap-phase">
+            <div class="phase-header">
+              <div class="phase-num">Phase 2</div>
+              <div class="phase-meta">
+                <h3 class="phase-title">Data Layer — Database & ORM</h3>
+                <span class="phase-duration">~1 week</span>
+              </div>
+            </div>
+            <div class="phase-items">
+              <div class="phase-item"><span class="pi-icon">📖</span> Study the Prisma schema — understand each model and its relationships</div>
+              <div class="phase-item"><span class="pi-icon">📖</span> Learn what PostgreSQL's JSONB column type does and when to use it</div>
+              <div class="phase-item"><span class="pi-icon">🛠️</span> Use Prisma Studio to browse the database structure visually</div>
+              <div class="phase-item"><span class="pi-icon">🛠️</span> Write and run your first Prisma migration</div>
+            </div>
+          </div>
+
+          <div class="roadmap-connector" aria-hidden="true">
+            <div class="rc-line"></div>
+          </div>
+
+          <div class="roadmap-phase">
+            <div class="phase-header">
+              <div class="phase-num">Phase 3</div>
+              <div class="phase-meta">
+                <h3 class="phase-title">Authentication — Identity & Access</h3>
+                <span class="phase-duration">~3 days</span>
+              </div>
+            </div>
+            <div class="phase-items">
+              <div class="phase-item"><span class="pi-icon">📖</span> Understand how Clerk sessions work and where the session token lives</div>
+              <div class="phase-item"><span class="pi-icon">📖</span> Trace the full auth flow: Request → Middleware → Clerk → App</div>
+              <div class="phase-item"><span class="pi-icon">🛠️</span> Protect a new route using Clerk middleware</div>
+            </div>
+          </div>
+
+          <div class="roadmap-connector" aria-hidden="true">
+            <div class="rc-line"></div>
+          </div>
+
+          <div class="roadmap-phase">
+            <div class="phase-header">
+              <div class="phase-num">Phase 4</div>
+              <div class="phase-meta">
+                <h3 class="phase-title">API Design — Server Actions & tRPC</h3>
+                <span class="phase-duration">~1 week</span>
+              </div>
+            </div>
+            <div class="phase-items">
+              <div class="phase-item"><span class="pi-icon">📖</span> Understand what Server Actions are and how they differ from API routes</div>
+              <div class="phase-item"><span class="pi-icon">📖</span> Learn how tRPC provides end-to-end type safety</div>
+              <div class="phase-item"><span class="pi-icon">🛠️</span> Build a new Server Action with Zod validation from scratch</div>
+            </div>
+          </div>
+
+          <div class="roadmap-connector" aria-hidden="true">
+            <div class="rc-line"></div>
+          </div>
+
+          <div class="roadmap-phase">
+            <div class="phase-header">
+              <div class="phase-num">Phase 5</div>
+              <div class="phase-meta">
+                <h3 class="phase-title">External Integrations — Payments & Email</h3>
+                <span class="phase-duration">~1 week</span>
+              </div>
+            </div>
+            <div class="phase-items">
+              <div class="phase-item"><span class="pi-icon">📖</span> Understand Stripe's webhook model and why idempotency matters</div>
+              <div class="phase-item"><span class="pi-icon">📖</span> Learn how Resend sends transactional emails with React templates</div>
+              <div class="phase-item"><span class="pi-icon">🛠️</span> Use the Stripe CLI to test a full checkout flow locally</div>
+            </div>
+          </div>
+
+          <div class="roadmap-connector" aria-hidden="true">
+            <div class="rc-line"></div>
+          </div>
+
+          <div class="roadmap-phase">
+            <div class="phase-header">
+              <div class="phase-num">Phase 6</div>
+              <div class="phase-meta">
+                <h3 class="phase-title">Production Readiness — Deploy & Scale</h3>
+                <span class="phase-duration">~3 days</span>
+              </div>
+            </div>
+            <div class="phase-items">
+              <div class="phase-item"><span class="pi-icon">📖</span> Understand Vercel's build and deployment model</div>
+              <div class="phase-item"><span class="pi-icon">📖</span> Learn how Redis caching prevents database overload at scale</div>
+              <div class="phase-item"><span class="pi-icon">🛠️</span> Deploy to Vercel and monitor the first production request</div>
+              <div class="phase-item"><span class="pi-icon">🏆</span> You can now confidently explain and extend this project</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ── SECTION: Engineering Report ── -->
+      <section class="content-section" id="section-report" aria-labelledby="report-title">
+        <div class="section-page-header">
+          <h1 class="section-page-title" id="report-title">Engineering Report</h1>
+          <p class="section-page-sub">A complete exportable summary of this project's engineering intelligence analysis.</p>
+        </div>
+
+        <div class="report-header-card">
+          <div class="rhc-top">
+            <div class="rhc-logo">
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none"><rect width="28" height="28" rx="7" fill="#0F0F0F"/><path d="M8 7h4v14H8V7zM16 7h4v14h-4V7z" fill="#F5F5F5" opacity="0.9"/><path d="M12 11h4v2h-4v-2zM12 15h4v2h-4v-2z" fill="#7C3AED"/></svg>
+            </div>
+            <div>
+<div class="rhc-title">Engineering Intelligence Report</div>
+              <div class="rhc-sub">Generated by HotDog · Wire v2.1</div>
+            </div>
+          </div>
+          <div class="rhc-project">vercel / next.js</div>
+          <div class="rhc-date">Generated on <span id="report-date"></span></div>
+        </div>
+
+        <div class="report-toc">
+          <h3 class="toc-title">Report Contents</h3>
+          <div class="toc-grid">
+            <div class="toc-item"><span class="toc-num">01</span> Executive Summary</div>
+            <div class="toc-item"><span class="toc-num">02</span> Engineering Blueprint</div>
+            <div class="toc-item"><span class="toc-num">03</span> Engineering Knowledge Library (14 cards)</div>
+            <div class="toc-item"><span class="toc-num">04</span> Engineering Relationships</div>
+            <div class="toc-item"><span class="toc-num">05</span> Engineering Decisions (3 major)</div>
+            <div class="toc-item"><span class="toc-num">06</span> Smart Recommendations (6 identified)</div>
+            <div class="toc-item"><span class="toc-num">07</span> Hidden Developer Tools (9 discovered)</div>
+            <div class="toc-item"><span class="toc-num">08</span> Learning Roadmap (6 phases)</div>
+          </div>
+        </div>
+
+        <div class="report-export-actions">
+          <button class="btn btn-primary btn-lg" id="export-pdf-btn">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M7.5 1v9M4.5 7l3 3 3-3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M1.5 11v1a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-1" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+            Download PDF Report
+          </button>
+          <button class="btn btn-ghost btn-lg" id="export-md-btn">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><rect x="1" y="3" width="13" height="9" rx="1.5" stroke="currentColor" stroke-width="1.2"/><path d="M4 9.5V5.5l2.5 3 2.5-3v4M11 9.5V5.5" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Export as Markdown
+          </button>
+          <button class="btn btn-ghost btn-lg" id="export-json-btn">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none" aria-hidden="true"><path d="M5 1.5H3a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h9a1 1 0 0 0 1-1v-10a1 1 0 0 0-1-1h-2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M5 1.5h5v3H5v-3z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            Export as JSON
+          </button>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ═══════════════════════════════════════
+         RIGHT SIDEBAR — Project Snapshot
+    ════════════════════════════════════════ -->
+    <aside class="sidebar-right" id="sidebar-right" aria-label="Project metadata">
+      <div class="sidebar-right-inner">
+
+        <div class="snapshot-card">
+          <div class="snapshot-header">
+            <div class="snapshot-repo-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.008-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.154-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.741 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10Z"/></svg>
+            </div>
+            <div>
+              <div class="snapshot-repo-name">vercel / next.js</div>
+              <a href="#" class="snapshot-repo-link" aria-label="Open repository on GitHub">github.com/vercel/next.js ↗</a>
+            </div>
+          </div>
+
+          <div class="snapshot-divider" aria-hidden="true"></div>
+
+          <div class="snapshot-rows">
+            <div class="snapshot-row">
+              <span class="sr-label">Primary Language</span>
+              <span class="sr-value">
+                <span class="lang-dot" style="background:#3178C6" aria-hidden="true"></span>
+                TypeScript
+              </span>
+            </div>
+            <div class="snapshot-row">
+              <span class="sr-label">Technologies</span>
+              <span class="sr-value sr-value--accent">14 detected</span>
+            </div>
+            <div class="snapshot-row">
+              <span class="sr-label">Complexity</span>
+              <span class="sr-value">
+                <span class="complexity-bar" aria-label="Advanced complexity">
+                  <span class="cb-fill" style="width:72%"></span>
+                </span>
+                Advanced
+              </span>
+            </div>
+            <div class="snapshot-row">
+              <span class="sr-label">Build Confidence</span>
+              <span class="sr-value sr-value--success">94% ↑</span>
+            </div>
+            <div class="snapshot-row">
+              <span class="sr-label">Analysis Date</span>
+              <span class="sr-value" id="snapshot-date">Today</span>
+            </div>
+            <div class="snapshot-row">
+              <span class="sr-label">Documentation</span>
+              <span class="sr-value sr-value--success">Generated ✓</span>
+            </div>
+            <div class="snapshot-row">
+              <span class="sr-label">Learning Time</span>
+              <span class="sr-value">~4 weeks</span>
+            </div>
+          </div>
+
+          <div class="snapshot-divider" aria-hidden="true"></div>
+
+          <!-- Quick tech badges -->
+          <div class="snapshot-tech-label">Detected Stack</div>
+          <div class="snapshot-tech-pills" aria-label="Detected technologies">
+            <span class="stp">Next.js</span>
+            <span class="stp">TypeScript</span>
+            <span class="stp">Prisma</span>
+            <span class="stp">PostgreSQL</span>
+            <span class="stp">Redis</span>
+            <span class="stp">Clerk</span>
+            <span class="stp">Vercel</span>
+            <span class="stp">Tailwind</span>
+            <span class="stp">tRPC</span>
+            <span class="stp">Zod</span>
+            <span class="stp">Stripe</span>
+            <span class="stp">Docker</span>
+            <span class="stp stp--more">+2 more</span>
+          </div>
+        </div>
+
+        <!-- Quick actions in sidebar -->
+        <div class="sidebar-actions">
+          <button class="sidebar-action-btn" data-goto="roadmap">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M1.5 10.5V5l5-3 5 3v5.5" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M4.5 13.5v-5h4v5" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
+            Open Learning Roadmap
+          </button>
+          <button class="sidebar-action-btn" data-goto="blueprint">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><rect x="1" y="1" width="4" height="4" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="1" width="4" height="4" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="8" width="4" height="4" rx="1" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="8" width="4" height="4" rx="1" stroke="currentColor" stroke-width="1.2"/><path d="M5 3h3M3 5v3M10 5v3M5 10h3" stroke="currentColor" stroke-width="1.1" stroke-linecap="round"/></svg>
+            View Architecture
+          </button>
+          <button class="sidebar-action-btn" data-goto="report">
+            <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"><path d="M7.5 1v8M4.5 6l3 3 3-3" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M1.5 10v1a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1v-1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/></svg>
+            Export Report
+          </button>
+        </div>
+
+      </div>
+    </aside>
+
+  </div><!-- /workspace -->
+
+  <!-- ─── FLOATING ACTIONS ─── -->
+  <div class="fab-panel" id="fab-panel" aria-label="Quick actions">
+    <div class="fab-group">
+      <button class="fab-item fab-item--ask" id="fab-ask" aria-label="Ask about this project (coming soon)" title="Ask About This Project">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.4"/><path d="M6.5 7a2.5 2.5 0 0 1 5 0c0 1.5-2.5 2-2.5 3.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><circle cx="9" cy="13.5" r="0.75" fill="currentColor"/></svg>
+        <span class="fab-label">Ask AI</span>
+        <span class="fab-soon">Soon</span>
+      </button>
+      <button class="fab-item" data-goto="report" aria-label="Export Engineering Report">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1v10M4 7l4 4 4-4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/><path d="M2 13h12" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <span class="fab-label">Export Report</span>
+      </button>
+      <button class="fab-item" data-goto="roadmap" aria-label="Open Learning Roadmap">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 12V6l6-4 6 4v6" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M6 16v-5h4v5" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+        <span class="fab-label">Roadmap</span>
+      </button>
+      <button class="fab-item" data-goto="blueprint" aria-label="View Architecture">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><rect x="1" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="10" y="1" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="1" y="10" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/><rect x="10" y="10" width="5" height="5" rx="1.2" stroke="currentColor" stroke-width="1.2"/></svg>
+        <span class="fab-label">Architecture</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ─── TECH KNOWLEDGE MODAL ─── -->
+  <div class="modal-overlay" id="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-box" id="modal-box">
+      <button class="modal-close" id="modal-close" aria-label="Close knowledge card">✕</button>
+      <div class="modal-content" id="modal-content"></div>
+    </div>
+  </div>
+
+  <script src="api.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
