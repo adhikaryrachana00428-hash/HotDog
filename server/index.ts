@@ -46,28 +46,30 @@ app.get('*', (req, res, next) => {
   });
 });
 
-const server = app.listen(PORT, () => {
-  console.log(`[HotDog] Server running at http://localhost:${PORT}`);
-  console.log(`[HotDog] Anakin API: ${process.env.ANAKIN_API_KEY ? 'configured' : 'not configured'}`);
-  console.log(`[HotDog] Wire API: ${process.env.WIRE_API_KEY && process.env.WIRE_ACTION_ID ? 'configured' : 'not configured'}`);
-  console.log(`[HotDog] Heuristic fallback: ${process.env.USE_HEURISTIC_FALLBACK === 'true' ? 'enabled' : 'disabled'}`);
-});
+if (!process.env.VERCEL) {
+  const server = app.listen(PORT, () => {
+    console.log(`[HotDog] Server running at http://localhost:${PORT}`);
+    console.log(`[HotDog] Anakin API: ${process.env.ANAKIN_API_KEY ? 'configured' : 'not configured'}`);
+    console.log(`[HotDog] Wire API: ${process.env.WIRE_API_KEY && process.env.WIRE_ACTION_ID ? 'configured' : 'not configured'}`);
+    console.log(`[HotDog] Heuristic fallback: ${process.env.USE_HEURISTIC_FALLBACK === 'true' ? 'enabled' : 'disabled'}`);
+  });
 
-// Handle server errors gracefully
-server.on('error', (error: NodeJS.ErrnoException) => {
-  if (error.code === 'EADDRINUSE') {
-    console.error(`\n❌ Error: Port ${PORT} is already in use.`);
-    console.error(`\nTo fix this, you can:`);
-    console.error(`1. Kill the process using port ${PORT}:`);
-    console.error(`   lsof -ti:${PORT} | xargs kill -9`);
-    console.error(`2. Or use a different port by setting PORT environment variable:`);
-    console.error(`   PORT=3002 npm run dev\n`);
-    process.exit(1);
-  } else {
-    console.error(`\n❌ Server error: ${error.message}`);
-    process.exit(1);
-  }
-});
+  // Handle server errors gracefully
+  server.on('error', (error: NodeJS.ErrnoException) => {
+    if (error.code === 'EADDRINUSE') {
+      console.error(`\n❌ Error: Port ${PORT} is already in use.`);
+      console.error(`\nTo fix this, you can:`);
+      console.error(`1. Kill the process using port ${PORT}:`);
+      console.error(`   lsof -ti:${PORT} | xargs kill -9`);
+      console.error(`2. Or use a different port by setting PORT environment variable:`);
+      console.error(`   PORT=3002 npm run dev\n`);
+      process.exit(1);
+    } else {
+      console.error(`\n❌ Server error: ${error.message}`);
+      process.exit(1);
+    }
+  });
+}
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (reason, promise) => {

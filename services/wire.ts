@@ -144,7 +144,7 @@ async function executeWireTask(
   scraped: NormalizedScrapedContent,
   options: WireExecutionOptions = {}
 ): Promise<Record<string, unknown>> {
-  const submit = await wireFetch<{ job_id: string }>('/wire/task', {
+  const submit = await wireFetch<{ job_id?: string; jobId?: string; id?: string }>('/wire/task', {
     method: 'POST',
     body: JSON.stringify({
       action_id: WIRE_ACTION_ID,
@@ -158,9 +158,14 @@ async function executeWireTask(
     }),
   }, options);
 
+  const jobId = submit.job_id || submit.jobId || submit.id;
+  if (!jobId) {
+    throw new WireOrchestrationError('Wire task did not return a job ID.', 'NO_JOB_ID');
+  }
+
   const result = await pollUntilComplete(
     () => wireFetch<{ status: JobStatus; result?: Record<string, unknown>; data?: Record<string, unknown> }>(
-      `/wire/jobs/${submit.job_id}`
+      `/wire/jobs/${jobId}`
     , undefined, options),
     { intervalMs: 3000, timeoutMs: 180_000 }
   );
